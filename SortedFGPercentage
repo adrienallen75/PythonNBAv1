@@ -1,0 +1,18 @@
+# Define a list of dictionaries representing point guards with their FG percentages
+point_guards = [
+    {"name": "Stephen Curry", "FG_percentage": 48.7},
+    {"name": "Damian Lillard", "FG_percentage": 44.4},
+    {"name": "Chris Paul", "FG_percentage": 49.9},
+    {"name": "Kyrie Irving", "FG_percentage": 50.6},
+    {"name": "Russell Westbrook", "FG_percentage": 44.7}
+]
+
+# Sort the point guards based on FG percentage in ascending order
+sorted_point_guards = sorted(point_guards, key=lambda x: x["FG_percentage"])
+
+# Iterate over the sorted list and print the point guards' names and FG percentages
+print("Top Point Guards by FG Percentage (Ascending Order):")
+for point_guard in sorted_point_guards:
+    print("Name:", point_guard["name"])
+    print("FG Percentage:", point_guard["FG_percentage"])
+    print()
