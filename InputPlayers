@@ -1,0 +1,35 @@
+ # Create an empty list to store player stats
+player_stats = []
+
+# Define a function to capture player stats
+def capture_stats():
+    player = input("Enter player name: ")
+    points = int(input("Enter points scored: "))
+    rebounds = int(input("Enter rebounds: "))
+    assists = int(input("Enter assists: "))
+    
+    # Create a dictionary to store the player's stats
+    player_data = {
+        "Player": player,
+        "Points": points,
+        "Rebounds": rebounds,
+        "Assists": assists
+    }
+    
+    # Append the player's stats to the list
+    player_stats.append(player_data)
+    print("Stats captured successfully!")
+
+# Function call to capture stats for multiple players
+num_players = int(input("Enter the number of players: "))
+for _ in range(num_players):
+    capture_stats()
+
+# Print the captured player stats
+print("\nCaptured Player Stats:")
+for player_data in player_stats:
+    print("Player:", player_data["Player"])
+    print("Points:", player_data["Points"])
+    print("Rebounds:", player_data["Rebounds"])
+    print("Assists:", player_data["Assists"])
+    print()
