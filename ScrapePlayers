@@ -1,0 +1,47 @@
+import requests
+from bs4 import BeautifulSoup
+
+# Function to scrape player stats from ESPN
+def scrape_player_stats(player_name):
+    # Format the player name for the ESPN URL
+    formatted_name = player_name.lower().replace(" ", "-")
+    
+    # Create the URL for the player's ESPN page
+    url = f"https://www.espn.com/nba/player/stats/_/id/{formatted_name}"
+    
+    # Send a GET request to the URL
+    response = requests.get(url)
+    
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the HTML content using Beautiful Soup
+        soup = BeautifulSoup(response.content, "html.parser")
+        
+        # Find the table containing the player stats
+        table = soup.find("table", class_="Table Table--align-right")
+        
+        # Check if the table exists
+        if table:
+            # Extract the relevant data from the table
+            stats = table.find_all("td")
+            points = int(stats[0].text)
+            rebounds = int(stats[1].text)
+            assists = int(stats[2].text)
+            
+            # Return the player stats
+            return {"Player": player_name, "Points": points, "Rebounds": rebounds, "Assists": assists}
+        else:
+            print("Player stats table not found.")
+    else:
+        print("Failed to retrieve player stats.")
+
+# Example usage
+player_name = input("Enter player name: ")
+player_stats = scrape_player_stats(player_name)
+
+if player_stats:
+    print("Player stats:")
+    print("Player:", player_stats["Player"])
+    print("Points:", player_stats["Points"])
+    print("Rebounds:", player_stats["Rebounds"])
+    print("Assists:", player_stats["Assists"])
